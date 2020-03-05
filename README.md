@@ -9,12 +9,15 @@ whether the SecurityApi.process() signs and creates JSON Web Token
 or verifies the JSON Web Token.
 
 ## Local Maven Repo
+To install the securityapi.jar to local maven repository, run the mvn command shown below:
+```
 ARTIFACT=securityapi
 VER=1.0
 LIBS=./build/libs
 JAR=$LIBS/$ARTIFACT-$VER.jar
 GROUP=com.churchclerk
 mvn install:install-file -Dfile=$JAR -DgroupId=$GROUP -DartifactId=$ARTIFACT -Dversion=$VER -Dpackaging=jar
+```
 
 ## Jenkins v2.222
 In Global Tool Configuration, 
