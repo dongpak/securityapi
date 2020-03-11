@@ -40,6 +40,7 @@ public class SecurityApi {
                         .withIssuer("auth0")
                         .withExpiresAt(token.getExpiresAt())
                         .withClaim("id", token.getId())
+                        .withClaim("roles", token.getRoles())
                         .withClaim("location", token.getLocation())
                         .sign(Algorithm.HMAC256(token.getSecret()));
 
@@ -53,6 +54,7 @@ public class SecurityApi {
 
             token.setExpiresAt(jwt.getExpiresAt());
             token.setId(jwt.getClaim("id").asString());
+            token.setRoles(jwt.getClaim("roles").asString());
             token.setLocation(jwt.getClaim("location").asString());
 
             return token.expired() == false;
@@ -61,5 +63,17 @@ public class SecurityApi {
             token.setError(t);
             return false;
         }
+    }
+
+    public static void main(String[] args) {
+        SecurityToken token = new SecurityToken();
+
+        token.setSecret("churchclerk");
+        token.setId("admin");
+        token.setValidFor(1000*60*60*24*100);
+        token.setLocation("10.0.0.2");
+
+        SecurityApi.process(token);
+        System.out.println(token.getJwt());
     }
 }

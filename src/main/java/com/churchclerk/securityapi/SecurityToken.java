@@ -9,6 +9,7 @@ import java.util.Date;
  */
 public class SecurityToken {
     private String      id;
+    private String      roles;
     private String      location;
     private String      secret;
     private String      jwt;
@@ -22,6 +23,14 @@ public class SecurityToken {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public String getLocation() {
