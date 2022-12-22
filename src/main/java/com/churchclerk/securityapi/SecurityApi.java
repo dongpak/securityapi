@@ -68,10 +68,11 @@ public class SecurityApi {
     public static void main(String[] args) {
         SecurityToken token = new SecurityToken();
 
-        token.setSecret("churchclerk");
+        token.setSecret("test");
         token.setId("admin");
         token.setValidFor(1000*60*60*24*100);
-        token.setLocation("10.0.0.2");
+        token.setLocation("0:0:0:0:0:0:0:1");
+        token.setRoles("SUPER");
 
         SecurityApi.process(token);
         System.out.println(token.getJwt());
