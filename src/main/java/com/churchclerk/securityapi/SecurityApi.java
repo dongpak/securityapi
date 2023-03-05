@@ -7,6 +7,7 @@ package com.churchclerk.securityapi;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +17,8 @@ import java.util.Date;
 /**
  *
  */
+@Slf4j
 public class SecurityApi {
-
-    private static Logger logger	= LoggerFactory.getLogger(SecurityApi.class);
 
     /**
      *
@@ -29,14 +29,14 @@ public class SecurityApi {
     public static boolean process(SecurityToken token) {
 
         if (token == null) {
-            logger.warn("SecurityToken is required");
+            log.warn("SecurityToken is required");
             return false;
         }
 
         try {
             if (token.getJwt() == null) {
-
-                String jwt = JWT.create()
+                // -- create new token
+                var jwt = JWT.create()
                         .withIssuer("auth0")
                         .withExpiresAt(token.getExpiresAt())
                         .withClaim("id", token.getId())
@@ -48,7 +48,8 @@ public class SecurityApi {
                 return true;
             }
 
-            DecodedJWT jwt = JWT.require(Algorithm.HMAC256(token.getSecret()))
+            // decode token
+            var jwt = JWT.require(Algorithm.HMAC256(token.getSecret()))
                     .withIssuer("auth0")
                     .build().verify(token.getJwt());
 
