@@ -22,4 +22,13 @@ dependencies {
     testAnnotationProcessor(libs.lombok)
 }
 
-
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
