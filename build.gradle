@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group 'com.churchclerk'
@@ -7,20 +8,18 @@ version '1.1'
 
 //sourceCompatibility = 1.8
 
-//apply plugin: 'maven'
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'com.auth0:java-jwt:3.2.0'
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    implementation 'org.projectlombok:lombok:1.18.24'
-    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    implementation libs.java.jwt
+    implementation libs.slf4j.api
+    implementation libs.lombok
+    annotationProcessor libs.lombok
 
-    testImplementation('org.projectlombok:lombok:1.18.24')
-    testAnnotationProcessor('org.projectlombok:lombok:1.18.24')
+    testImplementation(libs.lombok)
+    testAnnotationProcessor(libs.lombok)
 }
 
 
